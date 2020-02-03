@@ -9,6 +9,10 @@ class GildedRose(object):
         if item.quality > 0:
             item.quality = item.quality - 1
 
+    def increase_quality(self, item):
+        if item.quality < 50:
+            item.quality = item.quality + 1
+
     def update_quality(self):
         for item in self.items:
             is_aged_brie_or_backstage = (
@@ -21,10 +25,10 @@ class GildedRose(object):
                     item.quality = item.quality + 1
 
                     if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11 and item.quality < 50:
-                            item.quality = item.quality + 1
-                        if item.sell_in < 6 and item.quality < 50:
-                            item.quality = item.quality + 1
+                    if item.sell_in < 11:
+                        self.increase_quality(item)
+                    if item.sell_in < 6:
+                        self.increase_quality(item)
             else:
                 if item.name != "Sulfuras, Hand of Ragnaros":
                     self.decrease_quality(item)
