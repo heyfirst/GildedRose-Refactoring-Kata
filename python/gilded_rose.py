@@ -27,7 +27,9 @@ class GildedRose(object):
                     if item.sell_in < 6:
                         self.increase_quality(item)
             else:
-                if item.name != "Sulfuras, Hand of Ragnaros":
+                if item.name == "Sulfuras, Hand of Ragnaros":
+                    continue
+                else:
                     self.decrease_quality(item)
 
             if item.name != "Sulfuras, Hand of Ragnaros":
