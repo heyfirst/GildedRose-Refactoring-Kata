@@ -40,8 +40,6 @@ class GildedRose(object):
                     self.increase_quality(item)
                 elif item.name == "Backstage passes to a TAFKAL80ETC concert":
                     item.quality = 0
-                elif item.name == "Sulfuras, Hand of Ragnaros":
-                    continue
                 else:
                     self.decrease_quality(item)
 
