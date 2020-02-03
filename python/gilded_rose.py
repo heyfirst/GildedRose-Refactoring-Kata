@@ -15,17 +15,17 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if (
-                item.name == "Aged Brie"
-                or item.name == "Backstage passes to a TAFKAL80ETC concert"
-            ):
+            if item.name == "Aged Brie":
                 self.increase_quality(item)
 
-                if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                    if item.sell_in < 11:
-                        self.increase_quality(item)
-                    if item.sell_in < 6:
-                        self.increase_quality(item)
+            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+                self.increase_quality(item)
+
+                if item.sell_in < 11:
+                    self.increase_quality(item)
+                if item.sell_in < 6:
+                    self.increase_quality(item)
+
             else:
                 if item.name == "Sulfuras, Hand of Ragnaros":
                     continue
