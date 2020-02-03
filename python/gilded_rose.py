@@ -15,6 +15,9 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
+            if item.name == "Sulfuras, Hand of Ragnaros":
+                continue
+
             if item.name == "Aged Brie":
                 self.increase_quality(item)
 
@@ -25,12 +28,8 @@ class GildedRose(object):
                     self.increase_quality(item)
                 if item.sell_in < 6:
                     self.increase_quality(item)
-
             else:
-                if item.name == "Sulfuras, Hand of Ragnaros":
-                    continue
-                else:
-                    self.decrease_quality(item)
+                self.decrease_quality(item)
 
             if item.name != "Sulfuras, Hand of Ragnaros":
                 item.sell_in = item.sell_in - 1
