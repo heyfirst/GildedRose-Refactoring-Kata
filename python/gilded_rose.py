@@ -7,34 +7,7 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if item.name == "Sulfuras, Hand of Ragnaros":
-                continue
-
-            elif item.name == "Aged Brie":
-                item.increase_quality()
-                item.sell_in = item.sell_in - 1
-
-                if item.sell_in < 0:
-                    item.increase_quality()
-
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                item.increase_quality()
-
-                if item.sell_in < 11:
-                    item.increase_quality()
-                if item.sell_in < 6:
-                    item.increase_quality()
-                item.sell_in = item.sell_in - 1
-
-                if item.sell_in < 0:
-                    item.quality = 0
-
-            else:
-                item.decrease_quality()
-                item.sell_in = item.sell_in - 1
-
-                if item.sell_in < 0:
-                    item.decrease_quality()
+            item.update()
 
 
 class Item:
@@ -53,3 +26,33 @@ class Item:
     def increase_quality(self):
         if self.quality < 50:
             self.quality = self.quality + 1
+
+    def update(self):
+        if self.name == "Sulfuras, Hand of Ragnaros":
+            return
+
+        elif self.name == "Aged Brie":
+            self.increase_quality()
+            self.sell_in = self.sell_in - 1
+
+            if self.sell_in < 0:
+                self.increase_quality()
+
+        elif self.name == "Backstage passes to a TAFKAL80ETC concert":
+            self.increase_quality()
+
+            if self.sell_in < 11:
+                self.increase_quality()
+            if self.sell_in < 6:
+                self.increase_quality()
+            self.sell_in = self.sell_in - 1
+
+            if self.sell_in < 0:
+                self.quality = 0
+
+        else:
+            self.decrease_quality()
+            self.sell_in = self.sell_in - 1
+
+            if self.sell_in < 0:
+                self.decrease_quality()
