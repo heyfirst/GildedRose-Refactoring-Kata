@@ -16,6 +16,15 @@ class Item:
         self.sell_in = sell_in
         self.quality = quality
 
+        if self.name == "Sulfuras, Hand of Ragnaros":
+            self.__update_func = update_sulfuras
+        elif self.name == "Aged Brie":
+            self.__update_func = update_aged_brie
+        elif self.name == "Backstage passes to a TAFKAL80ETC concert":
+            self.__update_func = update_backstage
+        else:
+            self.__update_func = update_item
+
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
@@ -28,31 +37,43 @@ class Item:
             self.quality = self.quality + 1
 
     def update(self):
-        if self.name == "Sulfuras, Hand of Ragnaros":
-            return
+        self.__update_func(self)
 
-        elif self.name == "Aged Brie":
-            self.increase_quality()
-            self.sell_in = self.sell_in - 1
 
-            if self.sell_in < 0:
-                self.increase_quality()
+def update_sulfuras(item):
+    return item
 
-        elif self.name == "Backstage passes to a TAFKAL80ETC concert":
-            self.increase_quality()
 
-            if self.sell_in < 11:
-                self.increase_quality()
-            if self.sell_in < 6:
-                self.increase_quality()
-            self.sell_in = self.sell_in - 1
+def update_aged_brie(item):
+    item.increase_quality()
+    item.sell_in = item.sell_in - 1
+    if item.sell_in < 0:
+        item.increase_quality()
 
-            if self.sell_in < 0:
-                self.quality = 0
+    return item
 
-        else:
-            self.decrease_quality()
-            self.sell_in = self.sell_in - 1
 
-            if self.sell_in < 0:
-                self.decrease_quality()
+def update_backstage(item):
+    item.increase_quality()
+
+    if item.sell_in < 11:
+        item.increase_quality()
+    if item.sell_in < 6:
+        item.increase_quality()
+
+    item.sell_in = item.sell_in - 1
+
+    if item.sell_in < 0:
+        item.quality = 0
+
+    return item
+
+
+def update_item(item):
+    item.decrease_quality()
+    item.sell_in = item.sell_in - 1
+
+    if item.sell_in < 0:
+        item.decrease_quality()
+
+    return item
