@@ -2,6 +2,7 @@
 from __future__ import print_function
 
 from gilded_rose import *
+from items.model import Item
 
 if __name__ == "__main__":
     print("OMGHAI!")
